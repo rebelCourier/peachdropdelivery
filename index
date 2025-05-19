@@ -1,0 +1,127 @@
+// =======================
+// 1. SITE LAYOUT MOCKUP
+// =======================
+
+// Top-level Navigation:
+// [ Home | Browse Stores | Couriers | Map | About | Login/Signup ]
+
+// --- Home Page ---
+// Hero section: "Order Local. Delivered by Bike."
+// Subtext: "From Downtown to Atlantic Station, get food and groceries picked up and delivered by a local cyclist."
+// CTA Buttons: [Browse Stores] [Find a Courier]
+
+// --- Browse Stores ---
+// Category filters: [Food | Groceries | Coffee | Essentials]
+// Store cards with logo, short description, and [Order Now] link (opens store site in iframe or new tab)
+
+// --- Courier Map View ---
+// Live map showing available couriers and store locations
+// Toggle filter: [Show Stores] [Show Couriers]
+// Clickable pins: Show courier/store info in sidebar
+
+// --- Courier Profiles ---
+// Name, profile photo, rating, bio, preferred delivery area
+// [Request Delivery] button if courier is online
+
+// --- Order Process ---
+// Step 1: User selects a store and places order directly on their site
+// Step 2: Comes back to your site to select a courier
+// Step 3: Pays $10 fee via Stripe, confirms details
+
+// --- About Page ---
+// Mission: Empower local cyclists. Support small businesses. Fast local delivery.
+
+// --- Login/Signup ---
+// Roles: [Customer] or [Courier]
+// Options: Email/Password or Google Auth
+
+
+// ==========================
+// 2. TECHNICAL ROADMAP
+// ==========================
+
+// --- Phase 1: MVP Build ---
+// - Store directory (React + simple JSON or Firebase backend)
+// - Courier sign-up with profiles
+// - Stripe checkout for fixed $10 fee
+// - Google Maps integration for viewing couriers
+
+// --- Phase 2: Real-Time Features ---
+// - Live courier availability (use Firebase or Socket.io)
+// - GPS tracking (use Geolocation API + Mapbox or Google Maps API)
+// - Dynamic map pins and popups
+
+// --- Phase 3: Admin Dashboard ---
+// - Courier approval system
+// - Store submission form
+// - Analytics dashboard (orders, revenue, couriers)
+
+// --- Phase 4: Mobile Optimization & App ---
+// - Responsive mobile-first design
+// - React Native or Flutter app mirroring site
+
+
+// ==========================
+// 3. BASIC PROTOTYPE OUTLINE (REACT)
+// ==========================
+
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+
+export default function App() {
+  return (
+    <Router>
+      <nav className="p-4 bg-black text-white flex justify-between">
+        <div>BikeDrop</div>
+        <div className="space-x-4">
+          <Link to="/">Home</Link>
+          <Link to="/stores">Browse Stores</Link>
+          <Link to="/couriers">Couriers</Link>
+          <Link to="/map">Map</Link>
+          <Link to="/about">About</Link>
+        </div>
+      </nav>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/stores" element={<BrowseStores />} />
+        <Route path="/couriers" element={<CourierList />} />
+        <Route path="/map" element={<MapView />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </Router>
+  );
+}
+
+function Home() {
+  return (
+    <div className="text-center p-10">
+      <h1 className="text-4xl font-bold">Order Local. Delivered by Bike.</h1>
+      <p className="text-xl mt-4">Support small business. Hire a local cyclist courier for just $10.</p>
+      <div className="mt-6 space-x-4">
+        <Link to="/stores" className="bg-blue-500 px-4 py-2 rounded text-white">Browse Stores</Link>
+        <Link to="/couriers" className="bg-green-500 px-4 py-2 rounded text-white">Find a Courier</Link>
+      </div>
+    </div>
+  );
+}
+
+function BrowseStores() {
+  return <div className="p-4">[Store List Coming Soon]</div>;
+}
+
+function CourierList() {
+  return <div className="p-4">[Courier Profiles Coming Soon]</div>;
+}
+
+function MapView() {
+  return <div className="p-4">[Map Integration Coming Soon]</div>;
+}
+
+function About() {
+  return (
+    <div className="p-4">
+      <h2 className="text-2xl font-bold">About BikeDrop</h2>
+      <p className="mt-2">We connect locals in Atlanta with bike couriers who deliver pickups from Midtown, Downtown, and Atlantic Station. It’s fast, eco-friendly, and helps riders thrive.</p>
+    </div>
+  );
+}
