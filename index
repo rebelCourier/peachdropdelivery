@@ -92,7 +92,8 @@
       <div class="cta-buttons">
         <button class="login-btn">
           <a href="#login">Log In</a></button>
-        <button class="signup-btn"><a href="#signup"></a>Sign Up</button>
+        <button class="signup-btn">
+          <a href="#signup"></a>Sign Up</button>
       </div>
     </section>
   </main>

@@ -1,0 +1,101 @@
+/* Global Font Selection */
+/*@font-face {
+    font-family: 'RacingSansOne';
+    src: url(../baseassets/fonts/RacingSansOne-Regular.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url(../baseassets/fonts/Montserrat-BlackItalic.ttf) format(truetype);
+}*/
+
+/* Global Colors Palette */
+:root {
+    --peach-beige: #F3D4B9;
+    --forest-green: #228B22;
+    --spanish-orange: #E86100;
+    --british-racing-green: #004225;
+}
+
+/* Global Scroll Behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Box sizing rules */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Remove default margin & padding */
+* {
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+}
+
+/* Set default font inheritance */
+html {
+    font-size: 100%;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+}
+
+/* Remove list styles */
+ul, ol {
+    list-style: none;
+}
+
+/* Remove default link styling */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Reset images and videos */
+img, video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Remove default button styles */
+button, input, select, textarea {
+    font: inherit;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+/* Make buttons clickable */
+button {
+    cursor: pointer;
+}
+
+/* Ensure consistent line height */
+body {
+    line-height: 1.5;
+    font-family: sans-serif;
+}
+
+/* Remove default table styling */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* Remove default styling for headings */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+}
+
+/* Reset form elements */
+input, textarea, select {
+    appearance: none;
+}
+
+/* Remove outline on active elements (customize as needed) */
+*:focus {
+    outline: none;
+}
