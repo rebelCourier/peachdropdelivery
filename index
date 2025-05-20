@@ -1,3 +1,4 @@
+<!-- 
 // =======================
 // 1. SITE LAYOUT MOCKUP
 // =======================
@@ -64,64 +65,37 @@
 // ==========================
 // 3. BASIC PROTOTYPE OUTLINE (REACT)
 // ==========================
+-->
 
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-
-export default function App() {
-  return (
-    <Router>
-      <nav className="p-4 bg-black text-white flex justify-between">
-        <div>BikeDrop</div>
-        <div className="space-x-4">
-          <Link to="/">Home</Link>
-          <Link to="/stores">Browse Stores</Link>
-          <Link to="/couriers">Couriers</Link>
-          <Link to="/map">Map</Link>
-          <Link to="/about">About</Link>
-        </div>
-      </nav>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/stores" element={<BrowseStores />} />
-        <Route path="/couriers" element={<CourierList />} />
-        <Route path="/map" element={<MapView />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
-    </Router>
-  );
-}
-
-function Home() {
-  return (
-    <div className="text-center p-10">
-      <h1 className="text-4xl font-bold">Order Local. Delivered by Bike.</h1>
-      <p className="text-xl mt-4">Support small business. Hire a local cyclist courier for just $10.</p>
-      <div className="mt-6 space-x-4">
-        <Link to="/stores" className="bg-blue-500 px-4 py-2 rounded text-white">Browse Stores</Link>
-        <Link to="/couriers" className="bg-green-500 px-4 py-2 rounded text-white">Find a Courier</Link>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PeachDrop</title>
+</head>
+<body>
+  <nav>
+    <h2>PeachDrop Delivery</h2>
+    <ul>
+      <li>About</li>
+      <li>Order</li>
+      <li>Couriers</li>
+      <li>Map</li>
+      <li>Account</li>
+    </ul>
+  </nav>
+  <main id="home">
+    <section class="hero">
+      <h1></h1>
+      <p></p>
+      <div class="cta-buttons">
+        <button class="login-btn">
+          <a href="#login">Log In</a></button>
+        <button class="signup-btn"><a href="#signup"></a>Sign Up</button>
       </div>
-    </div>
-  );
-}
-
-function BrowseStores() {
-  return <div className="p-4">[Store List Coming Soon]</div>;
-}
-
-function CourierList() {
-  return <div className="p-4">[Courier Profiles Coming Soon]</div>;
-}
-
-function MapView() {
-  return <div className="p-4">[Map Integration Coming Soon]</div>;
-}
-
-function About() {
-  return (
-    <div className="p-4">
-      <h2 className="text-2xl font-bold">About BikeDrop</h2>
-      <p className="mt-2">We connect locals in Atlanta with bike couriers who deliver pickups from Midtown, Downtown, and Atlantic Station. It’s fast, eco-friendly, and helps riders thrive.</p>
-    </div>
-  );
-}
+    </section>
+  </main>
+  <footer></footer>
+</body>
+</html>
