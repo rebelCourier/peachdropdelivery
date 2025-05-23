@@ -1,0 +1,100 @@
+body {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    background-color: var(--peach-beige);
+}
+
+
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: var(--british-racing-green);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border-bottom: 5px solid black;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-text {
+    padding-left: 20px;
+    color: var(--spanish-orange);
+}
+
+.option {
+    padding-right: 20px;
+    color: var(--spanish-orange);
+}
+
+.hero {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--british-racing-green);
+    height: 90vh;
+    padding-top: 100px;
+    padding-left: 75px;
+    padding-right: 75px;
+    margin-top: 10px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 50px;
+    border: 5px solid black;
+    border-bottom-left-radius: 100px;
+    border-bottom-right-radius: 100px;
+    gap: 10px;
+}
+
+h1 {
+    color: var(--spanish-orange);
+    font-size: 75px;
+}
+
+p {
+    color: var(--spanish-orange);
+    font-size: 50px;
+
+}
+
+.cta-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-btn {
+    color: var(--spanish-orange);
+}
+
+.signup-btn {
+    color: var(--spanish-orange);
+}
+
+footer {
+    background-color: black;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    border-top: 5px solid var(--spanish-orange);
+}
+
+.footer-logo {
+    height: 100px;
+}
