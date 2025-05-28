@@ -1,5 +1,5 @@
 /* Global Font Selection */
-/*@font-face {
+@font-face {
     font-family: 'RacingSansOne';
     src: url(../baseassets/fonts/RacingSansOne-Regular.ttf) format('truetype');
 }
@@ -7,7 +7,12 @@
 @font-face {
     font-family: 'Montserrat';
     src: url(../baseassets/fonts/Montserrat-BlackItalic.ttf) format(truetype);
-}*/
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url(../baseassets/Inter-VariableFont_opsz\,wght.ttf) format(truetype);
+}
 
 /* Global Colors Palette */
 :root {
@@ -15,6 +20,8 @@
     --forest-green: #228B22;
     --spanish-orange: #E86100;
     --british-racing-green: #004225;
+    --dark-green: #469126;
+    --osage-orange: #F5A342
 }
 
 /* Global Scroll Behavior */

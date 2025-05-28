@@ -2,84 +2,86 @@ body {
     display: flex;
     flex-direction: column;
     gap: 30px;
-    background-color: var(--peach-beige);
+    background-color: var(--dark-green);
 }
-
-
 
 nav {
     display: flex;
     justify-content: space-between;
     padding: 10px;
-    background-color: var(--british-racing-green);
-    position: fixed;
+    background-color: var(--osage-orange);
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    border-bottom: 5px solid black;
-    border-bottom-left-radius: 25px;
-    border-bottom-right-radius: 25px;
+}
+
+.title-logo {
+    padding-left: 20px;
+    color: var(--spanish-orange);
 }
 
 .nav-links {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.logo-text {
-    padding-left: 20px;
-    color: var(--spanish-orange);
+    font-family: 'Inter';
 }
 
 .option {
     padding-right: 20px;
-    color: var(--spanish-orange);
+    color: var(--dark-green);
 }
 
 .hero {
     display: flex;
     flex-direction: column;
-    background-color: var(--british-racing-green);
-    height: 90vh;
-    padding-top: 100px;
-    padding-left: 75px;
-    padding-right: 75px;
-    margin-top: 10px;
-    margin-left: 50px;
-    margin-right: 50px;
-    margin-bottom: 50px;
-    border: 5px solid black;
-    border-bottom-left-radius: 100px;
-    border-bottom-right-radius: 100px;
-    gap: 10px;
+    height: 100vh;
+    margin-top: 70px;
 }
 
-h1 {
-    color: var(--spanish-orange);
-    font-size: 75px;
+#background-video {
+    position: absolute;
+    height: 91%;
+    object-fit: cover;
+    z-index: 0;
 }
 
-p {
-    color: var(--spanish-orange);
-    font-size: 50px;
-
-}
-
-.cta-buttons {
+.hero-landing {
     display: flex;
     flex-direction: row;
-    gap: 25px;
-    align-items: center;
     justify-content: center;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    z-index: 1;
+    align-items: center;
+    gap: 150px;
 }
 
-.login-btn {
-    color: var(--spanish-orange);
+.hero-landing p span {
+    display: inline-block;
+    font-size: 75px;
+    margin: 10px;
+    font-family: 'Inter';
+    color: var(--osage-orange);
+    background-color: rgba(0, 0, 0, .5);
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 25px;
 }
 
-.signup-btn {
-    color: var(--spanish-orange);
+.hero-landing button {
+    font-size: 50px;
+    font-family: 'Inter';
+    border: 5px solid var(--osage-orange);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    color: var(--osage-orange);
+    background-color: rgba(0, 0, 0, .5);
+    border-radius: 25px;
 }
 
 footer {
