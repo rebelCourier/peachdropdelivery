@@ -84,6 +84,31 @@ nav {
     border-radius: 25px;
 }
 
+.courier-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 300px;
+    height: 70vh;
+}
+
+.courier-list h1 {
+    font-family: 'Inter';
+    font-size: 50px;
+}
+
+.profiles {
+    display: grid;
+    gap: 150px;
+    grid-template-areas: 
+    "profile1   profile2"
+    "profile3   profile4"
+    "profile5   profile6"
+    ;
+    width: 400px;
+    border: 10px solid black;
+}
+
 footer {
     background-color: black;
     align-items: center;
