@@ -5,15 +5,22 @@ body {
     background-color: var(--dark-green);
 }
 
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
 nav {
     display: flex;
     justify-content: space-between;
     padding: 10px;
     background-color: var(--osage-orange);
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
+    z-index: 1000;
 }
 
 .title-logo {
@@ -36,13 +43,14 @@ nav {
 .hero {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 90vh;
     margin-top: 70px;
 }
 
 #background-video {
     position: absolute;
     height: 91%;
+    width: 100vw;
     object-fit: cover;
     z-index: 0;
 }
@@ -52,7 +60,7 @@ nav {
     flex-direction: row;
     justify-content: center;
     width: 100%;
-    height: 100vh;
+    height: 90vh;
     position: absolute;
     z-index: 1;
     align-items: center;
@@ -84,29 +92,55 @@ nav {
     border-radius: 25px;
 }
 
-.courier-list {
+.courier-showcase {
     display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 25px;
+}
+
+.showcase-text {
     align-items: center;
-    justify-content: center;
-    gap: 300px;
-    height: 70vh;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    color: var(--osage-orange);
 }
 
-.courier-list h1 {
+.showcase-text h2 {
     font-family: 'Inter';
-    font-size: 50px;
+    font-weight: bold;
+    font-style: italic;
+    border-bottom: 5px solid var(--osage-orange);
+    background: rgba(0, 0, 0, .5);
+    border-radius: 25px;
+    padding: 10px;
 }
 
-.profiles {
+.showcase-text p {
+    max-width: 300px;
+    word-wrap: break-word;
+    font-family: 'Inter';
+    font-weight: 600;
+    font-style: italic;
+    font-size: 20px;
+    background: rgba(0, 0, 0, .5);
+    border-radius: 25px;
+    padding: 20px;
+    border: 5px solid var(--osage-orange);
+}
+
+.courier-grid {
     display: grid;
-    gap: 150px;
-    grid-template-areas: 
-    "profile1   profile2"
-    "profile3   profile4"
-    "profile5   profile6"
-    ;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 50px;
+    overflow-y: scroll;
+}
+
+.courier-card {
     width: 400px;
-    border: 10px solid black;
 }
 
 footer {
