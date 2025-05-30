@@ -74,6 +74,7 @@ nav {
     font-family: 'Inter';
     color: var(--osage-orange);
     background-color: rgba(0, 0, 0, .5);
+    border: 3px solid var(--osage-orange);
     padding-left: 15px;
     padding-right: 15px;
     border-radius: 25px;
@@ -82,7 +83,7 @@ nav {
 .hero-landing button {
     font-size: 50px;
     font-family: 'Inter';
-    border: 5px solid var(--osage-orange);
+    border: 3px solid var(--osage-orange);
     padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 15px;
@@ -98,6 +99,7 @@ nav {
     align-items: flex-start;
     justify-content: space-between;
     padding: 25px;
+    height: 75vh;
 }
 
 .showcase-text {
@@ -137,13 +139,38 @@ nav {
     grid-template-columns: repeat(2, 1fr);
     gap: 50px;
     overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--osage-orange) black;
+    scroll-behavior: smooth;
+    padding-right: 30px;
+    height: 75vh;
 }
 
 .courier-card {
-    width: 400px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    width: 350px;
+    gap: 25px;
+}
+
+.courier-card img {
+    border-radius: 75px;
+    border: 5px solid var(--osage-orange);
+}
+
+.courier-card .name, .desc {
+    margin-left: 30px;
+    border: 2.5px solid var(--osage-orange);
+    border-radius: 25px;
+    width: fit-content;
+    padding: 5px 15px;
 }
 
 footer {
+    display: flex;
+    flex-direction: row;
     background-color: black;
     align-items: center;
     position: relative;
@@ -157,5 +184,6 @@ footer {
 }
 
 .footer-logo {
-    height: 100px;
+    padding-left: 25px;
+    height: 70px;
 }
