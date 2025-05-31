@@ -72,33 +72,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="styles/indexstyle.css">
-  <link rel="stylesheet" type="text/css" href="styles/reset.css">
-  <link rel="icon" type="image/x-icon" href="baseassets/peachlogo.svg">
+  <link rel="stylesheet" type="text/css" href="static/styles/indexstyle.css">
+  <link rel="stylesheet" type="text/css" href="static/styles/reset.css">
+  <link rel="icon" type="image/x-icon" href="static/baseassets/peachlogo.svg">
   <title>PeachDrop</title>
 </head>
 <body>
   <nav>
-    <img class="title-logo" src="baseassets/peachtitlelogo.svg" alt="title logo">
+    <img class="title-logo" src="static/baseassets/peachtitlelogo.svg" alt="title logo">
     <ul class="nav-links">
-      <li class="option"><a href="pages/about.html">About</a></li>
-      <li class="option"><a href="pages/order.html">Order</a></li>
-      <li class="option"><a href="pages/couriers.html">Couriers</a></li>
-      <li class="option"><a href="pages/map.html">Map</a></li>
-      <li class="option"><a href="#">Account</a></li>
+      <li class="option"><a href="templates/about.html">About</a></li>
+      <li class="option"><a href="templates/order.html">Order</a></li>
+      <li class="option"><a href="templates/couriers.html">Couriers</a></li>
+      <li class="option"><a href="templates/map.html">Map</a></li>
+      <li class="option dropdown">
+        <a href="#">Account</a>
+        <div class="dropdown-menu">
+          <button onclick="location.href='/register-courier'">Register As Courier</button>
+          <button onclick="location.href='/register-customer'">Register As Customer</button>
+          <button onclick="location.href='/login'">Sign In</button>
+        </div>
+      </li>
     </ul>
   </nav>
   <main id="home">
     <section class="hero">
       <video autoplay muted loop id="background-video">
-      <source src="baseassets/backgroundvideo.mp4" type="video/mp4">
+      <source src="static/baseassets/backgroundvideo.mp4" type="video/mp4">
       </video>
       <div class="hero-landing">
         <p>
           <span>Order Local,</span><br>
           <span>Delivered By Bike</span>
         </p>
-        <button><a href="#">Order Now</a></button>
+        <button><a href="order.html">Order Now</a></button>
       </div>
     </section>
     <section class="courier-showcase">
@@ -110,37 +117,37 @@
       <!-- Courier Profile Testing List-->
       <div class="courier-grid">
         <div class="courier-card">
-          <img src="couriers/dj.jpg" alt="John Doe">
+          <img src="static/couriers/dj.jpg" alt="John Doe">
           <h3 class="name">John Doe</h3>
           <p class="desc">Delivers in Downtown & Midtown</p>
         </div>
 
         <div class="courier-card">
-          <img src="couriers/life.jpg" alt="Lisa Mendez">
+          <img src="static/couriers/life.jpg" alt="Lisa Mendez">
           <h3 class="name">Lisa Mendez</h3>
           <p class="desc">Specializes in grocery runs</p>
         </div>
 
         <div class="courier-card">
-          <img src="couriers/taejose.jpg" alt="Mark Thompson">
+          <img src="static/couriers/taejose.jpg" alt="Mark Thompson">
           <h3 class="name">Mark Thompson</h3>
           <p class="desc">Bike messenger veteran, ATL native</p>
         </div>
 
         <div class="courier-card">
-          <img src="couriers/swiper.jpg" alt="Sasha B.">
+          <img src="static/couriers/swiper.jpg" alt="Sasha B.">
           <h3 class="name">Sasha B.</h3>
           <p class="desc">Delivers all over Atlantic Station</p>
         </div>
 
         <div class="courier-card">
-          <img src="couriers/frogi.jpg" alt="Derek S.">
+          <img src="static/couriers/frogi.jpg" alt="Derek S.">
           <h3 class="name">Derek S.</h3>
           <p class="desc">Fastest delivery in the West End</p>
         </div>
 
         <div class="courier-card">
-          <img src="couriers/willis.jpg" alt="Amira Ali">
+          <img src="static/couriers/willis.jpg" alt="Amira Ali">
           <h3 class="name">Amira Ali</h3>
           <p class="desc">Available nights & weekends</p>
         </div>
@@ -148,7 +155,7 @@
     </section>
   </main>
   <footer>
-    <img class="footer-logo" src="baseassets/peachtitlelogo.svg" alt="small logo">
+    <img class="footer-logo" src="static/baseassets/peachtitlelogo.svg" alt="small logo">
     <p class="summary">  Peach Drop Delivery connects customers with local stores and independent cyclists for fast, eco-friendly deliveries across Atlanta. Order food or essentials and have them delivered by bike, right from your neighborhood.
     </p>
   </footer>

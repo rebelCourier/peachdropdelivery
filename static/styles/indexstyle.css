@@ -40,6 +40,38 @@ nav {
     color: var(--dark-green);
 }
 
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    gap: 10px;
+    background-color: var(--osage-orange);
+    border: 2px solid var(--dark-green);
+    border-radius: 8px;
+    padding: 10px;
+    z-index: 1001;
+    font-family: 'Inter';
+    font-weight: 600;
+    font-size: large;
+    align-items: center;
+}
+
+.dropdown-menu button {
+    width: max-content;
+    color: var(--dark-green);
+    padding: 10px;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: flex;
+}
+
 .hero {
     display: flex;
     flex-direction: column;
@@ -83,13 +115,13 @@ nav {
 .hero-landing button {
     font-size: 50px;
     font-family: 'Inter';
-    border: 3px solid var(--osage-orange);
+    border: 3px solid var(--dark-green);
     padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 15px;
     padding-right: 15px;
-    color: var(--osage-orange);
-    background-color: rgba(0, 0, 0, .5);
+    color: var(--dark-green);
+    background-color: rgba(247, 160, 67, .5);
     border-radius: 25px;
 }
 
