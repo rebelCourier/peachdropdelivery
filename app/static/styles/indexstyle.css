@@ -75,13 +75,13 @@ nav {
 .hero {
     display: flex;
     flex-direction: column;
-    height: 90vh;
+    height: 100vh;
     margin-top: 70px;
 }
 
 #background-video {
     position: absolute;
-    height: 91%;
+    height: 95%;
     width: 100vw;
     object-fit: cover;
     z-index: 0;
@@ -128,9 +128,10 @@ nav {
 .courier-showcase {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
     padding: 25px;
+    margin-bottom: 10px;
     height: 75vh;
 }
 
@@ -138,6 +139,7 @@ nav {
     align-items: center;
     gap: 20px;
     display: flex;
+    width: 600px;
     flex-direction: column;
     padding: 30px;
     color: var(--osage-orange);
@@ -147,19 +149,20 @@ nav {
     font-family: 'Inter';
     font-weight: bold;
     font-style: italic;
+    font-size: 50px;
     border-bottom: 5px solid var(--osage-orange);
     background: rgba(0, 0, 0, .5);
     border-radius: 25px;
-    padding: 10px;
+    padding: 10px 20px;
 }
 
 .showcase-text p {
-    max-width: 300px;
+    max-width: fit-content;
     word-wrap: break-word;
     font-family: 'Inter';
     font-weight: 600;
     font-style: italic;
-    font-size: 20px;
+    font-size: 30px;
     background: rgba(0, 0, 0, .5);
     border-radius: 25px;
     padding: 20px;
@@ -173,9 +176,10 @@ nav {
     overflow-y: scroll;
     overflow-x: hidden;
     scrollbar-width: thin;
-    scrollbar-color: var(--osage-orange) black;
+    scrollbar-color: var(--osage-orange) rgba(0, 0, 0, 0);
     scroll-behavior: smooth;
     padding-right: 30px;
+    padding-bottom: 30px;
     height: 75vh;
 }
 

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/regcourierstyle.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/reset.css') }}">
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='baseassets/peachlogo.svg') }}">
+  <title>Registration</title>
+</head>
+<body>
+    <nav>
+    <img class="title-logo" src="{{ url_for('static', filename='/baseassets/peachtitlelogo.svg') }}"  alt="title logo" onclick="location.href='/'">
+    <ul class="nav-links">
+      <li class="option"><a href="templates/about.html">About</a></li>
+      <li class="option"><a href="templates/order.html">Order</a></li>
+      <li class="option"><a href="templates/couriers.html">Couriers</a></li>
+      <li class="option"><a href="templates/map.html">Map</a></li>
+      <li class="option dropdown">
+        <a href="#">Account</a>
+        <div class="dropdown-menu">
+          <button onclick="location.href='/register-courier'">Register As Courier</button>
+          <button onclick="location.href='/register-customer'">Register As Customer</button>
+          <button onclick="location.href='/login'">Sign In</button>
+        </div>
+      </li>
+    </ul>
+  </nav>
+  <main>
+    <h1>Courier Registration</h1>
+    <form method="POST" action="/ submit-courier-registration">
+        <input type="text" name="name"  placeholder="Your Name" required>
+        <input type="text" name="zone"  placeholder="Preferred Delivery  Area" required>
+        <input type="submit"    value="Register">
+    </form>
+  </main>
+</body>
+</html>
