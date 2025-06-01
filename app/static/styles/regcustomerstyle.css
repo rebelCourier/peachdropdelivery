@@ -110,8 +110,14 @@ form {
 
 .profile-pic {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     color: var(--osage-orange);
+    gap: 20px;
+    text-shadow: 
+    -1px -1px 0 black,
+     1px -1px 0 black,
+    -1px  1px 0 black,
+     1px  1px 0 black;
 }
 
 .form-fields {
