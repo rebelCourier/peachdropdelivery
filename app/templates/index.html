@@ -80,12 +80,12 @@
 </head>
 <body>
   <nav>
-    <img class="title-logo" src="{{ url_for('static', filename='/baseassets/peachtitlelogo.svg') }}" alt="title logo" onclick="location.href='/'">
+    <img class="title-logo" src="{{ url_for('static', filename='baseassets/peachtitlelogo.svg') }}" alt="title logo" onclick="location.href='/'">
     <ul class="nav-links">
-      <li class="option"><a href="templates/about.html">About</a></li>
-      <li class="option"><a href="templates/order.html">Order</a></li>
-      <li class="option"><a href="templates/couriers.html">Couriers</a></li>
-      <li class="option"><a href="templates/map.html">Map</a></li>
+      <li class="option"><a href="{{ url_for('main.about') }}">About</a></li>
+      <li class="option"><a href="{{ url_for('main.order') }}">Order</a></li>
+      <li class="option"><a href="{{ url_for('main.couriers') }}">Couriers</a></li>
+      <li class="option"><a href="{{ url_for('main.map') }}">Map</a></li>
       <li class="option dropdown">
         <a href="#">Account</a>
         <div class="dropdown-menu">
@@ -156,7 +156,7 @@
     </section>
   </main>
   <footer>
-    <img class="footer-logo" src="static/baseassets/peachtitlelogo.svg" alt="small logo">
+    <img class="footer-logo" src="{{ url_for('static', filename='baseassets/peachtitlelogo.svg') }}" alt="small logo">
     <p class="summary">  Peach Drop Delivery connects customers with local stores and independent cyclists for fast, eco-friendly deliveries across Atlanta. Order food or essentials and have them delivered by bike, right from your neighborhood.
     </p>
   </footer>

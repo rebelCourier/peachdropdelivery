@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/regcustomerstyle.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/reset.css') }}">
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='baseassets/peachlogo.svg') }}">
+  <title>Registration</title>
+</head>
+<body>
+    <nav>
+    <img class="title-logo" src="{{ url_for('static', filename='baseassets/peachtitlelogo.svg') }}"  alt="title logo" onclick="location.href='/'">
+    <ul class="nav-links">
+      <li class="option"><a href="{{ url_for('main.about') }}">About</a></li>
+      <li class="option"><a href="{{ url_for('main.order') }}">Order</a></li>
+      <li class="option"><a href="{{ url_for('main.couriers') }}">Couriers</a></li>
+      <li class="option"><a href="{{ url_for('main.map') }}">Map</a></li>
+      <li class="option dropdown">
+        <a href="#">Account</a>
+        <div class="dropdown-menu">
+          <button onclick="location.href='/register-courier'">Register As Courier</button>
+          <button onclick="location.href='/register-customer'">Register As Customer</button>
+          <button onclick="location.href='/login'">Sign In</button>
+        </div>
+      </li>
+    </ul>
+  </nav>
+  <main>
+    <section class="regcustomerform">
+        <h1 class="form-title">Customer Registration</h1>
+        <form method="POST" action="{{ url_for('main.submit_customer_registration') }}" enctype="multipart/form-data" onsubmit="return checkPasswordsMatch()">
+            <section class="profile-picture">
+                <label for="profile_picture">Profile Picture <span class="required-star">*</span></label>
+                <input type="file" id="profile_picture" name="profile_pic" accept="image/*" required>
+            </section>
+            <section class="form-fields">
+                <input class="customer-name" type="text" name="name"  placeholder="> First and Last Name" required>
+                <input class="customer-address" type="text" name="address" placeholder="> Your Main Address" required>
+                <input class="customer-email" type="text" name="email" placeholder="> Your Email" required>
+                <input class="customer-phone" type="tel" name="phone"  placeholder="> Contact Number" required>
+                <input id="password" class="customer-password" type="password" name="password" placeholder="> Create Password" required>
+                <input id="confirm_password" class="customer-password" type="password" name="confirm_password" placeholder="> Confirm Password" required>
+                <p id="password-message" style="color: red; font-weight: bold; display: none;">Passwords do not match</p>
+                <input class="register" type="submit" value="Register">
+            </section>
+            
+        </form> 
+    </section>
+    
+    <footer>
+    <img class="footer-logo" src="{{ url_for('static', filename='baseassets/peachtitlelogo.svg') }}" alt="small logo">
+    <p class="summary">  Peach Drop Delivery connects customers with local stores and independent cyclists for fast, eco-friendly deliveries across Atlanta. Order food or essentials and have them delivered by bike, right from your neighborhood.
+    </p>
+  </footer>
+  </main>
+  <script>
+  const password = document.getElementById('password');
+  const confirmPassword = document.getElementById('confirm_password');
+  const message = document.getElementById('password-message');
+
+  function validatePasswords() {
+    if (password.value === confirmPassword.value) {
+      message.style.display = 'none';
+      confirmPassword.style.borderColor = 'var(--osage-orange)';
+      password.style.borderColor = 'var(--osage-orange)';
+    } else {
+      message.style.display = 'block';
+      confirmPassword.style.borderColor = 'red';
+      password.style.borderColor = 'red';
+    }
+  }
+
+  password.addEventListener('input', validatePasswords);
+  confirmPassword.addEventListener('input', validatePasswords);
+
+  function checkPasswordsMatch() {
+  if (password.value !== confirmPassword.value) {
+    alert('Passwords do not match. Please fix before submitting.');
+    return false; // Prevent form submit
+  }
+  return true; // Allow form submit
+}
+</script>
+</body>
+</html>
