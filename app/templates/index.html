@@ -78,7 +78,7 @@
   <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='baseassets/peachlogo.svg') }}">
   <title>PeachDrop</title>
 </head>
-<body>
+<body><!-- 
   <nav>
     <img class="title-logo" src="{{ url_for('static', filename='baseassets/peachtitlelogo.svg') }}" alt="title logo" onclick="location.href='/'">
     <ul class="nav-links">
@@ -95,7 +95,62 @@
         </div>
       </li>
     </ul>
-  </nav>
+  </nav> -->
+  {% if user_type == 'Customer' %}
+    <nav>
+        <img class="title-logo" src="{{ url_for('static', filename='baseassets/peachtitlelogo.svg') }}" alt="title logo"
+            onclick="location.href='/'">
+        <ul class="nav-links">
+            <li class="option"><a href="{{ url_for('main.about') }}">About</a></li>
+            <li class="option"><a href="{{ url_for('main.order') }}">Order</a></li>
+            <li class="option"><a href="{{ url_for('main.couriers') }}">Couriers</a></li>
+            <li class="option"><a href="{{ url_for('main.map') }}">Map</a></li>
+            <li class="option dropdown">
+                <a href="#">Account</a>
+                <div class="dropdown-menu">
+                    <button onclick="location.href='/dashboard'">Customer Dashboard</button>
+                    <button onclick="location.href='/logout'">Log Out</button>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    {% elif user_type == 'Courier' %}
+    <nav>
+        <img class="title-logo" src="{{ url_for('static', filename='baseassets/peachtitlelogo.svg') }}" alt="title logo"
+            onclick="location.href='/'">
+        <ul class="nav-links">
+            <li class="option"><a href="{{ url_for('main.about') }}">About</a></li>
+            <li class="option"><a href="{{ url_for('main.couriers') }}">Couriers</a></li>
+            <li class="option"><a href="{{ url_for('main.map') }}">Map</a></li>
+            <li class="option dropdown">
+                <a href="#">Account</a>
+                <div class="dropdown-menu">
+                    <button onclick="location.href='/dashboard'">Courier Dashboard</button>
+                    <button onclick="location.href='/logout'">Log Out</button>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    {% else %}
+    <nav>
+        <img class="title-logo" src="{{ url_for('static', filename='baseassets/peachtitlelogo.svg') }}" alt="title logo"
+            onclick="location.href='/'">
+        <ul class="nav-links">
+            <li class="option"><a href="{{ url_for('main.about') }}">About</a></li>
+            <li class="option"><a href="{{ url_for('main.order') }}">Order</a></li>
+            <li class="option"><a href="{{ url_for('main.couriers') }}">Couriers</a></li>
+            <li class="option"><a href="{{ url_for('main.map') }}">Map</a></li>
+            <li class="option dropdown">
+                <a href="#">Account</a>
+                <div class="dropdown-menu">
+                    <button onclick="location.href='/register-courier'">Register As Courier</button>
+                    <button onclick="location.href='/register-customer'">Register As Customer</button>
+                    <button onclick="location.href='/login'">Sign In</button>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    {% endif %}
   <main id="home">
     <section class="hero">
       <video autoplay muted loop id="background-video">
