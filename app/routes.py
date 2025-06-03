@@ -8,7 +8,7 @@ from .models import Customer, Courier
 main = Blueprint('main', __name__, static_folder='static', template_folder='templates')
 
 user = Blueprint('user', __name__)
-UPLOAD_FOLDER = 'static/uploads'
+UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static/uploads')
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 def allowed_file(filename):
@@ -23,7 +23,8 @@ def save_uploaded_file(file):
             os.makedirs(UPLOAD_FOLDER)
         filepath = os.path.join(UPLOAD_FOLDER, unique_name)
         file.save(filepath)
-        return filepath
+        # Return path relative to "static" for correct URL use
+        return f"uploads/{unique_name}"
     return None
 
 @main.route('/')
@@ -140,6 +141,10 @@ def login():
             session['user_id'] = user.id
             session['user_role'] = role
             session['user_name'] = user.name
+            session['user_email'] = user.email
+            session['user_nickname'] = user.nickname
+            session['user_phone'] = user.phone
+            session['profile_pic'] = user.profile_pic
             return redirect(url_for('main.dashboard'))  # You'll define this page
         else:
             return render_template('login.html', error="Invalid email or password.")
@@ -153,11 +158,19 @@ def dashboard():
 
     user_role = session.get('user_role')  # could be 'customer' or 'courier'
     user_name = session.get('user_name')
+    user_email = session.get('user_email')
+    user_nickname = session.get('user_nickname')
+    user_phone = session.get('user_phone')
+    profile_pic = session.get('profile_pic')
 
-    if user_role == 'customer':
-        return render_template('dashboard.html', user_type='Customer', user_name=user_name)
-    elif user_role == 'courier':
-        return render_template('dashboard.html', user_type='Courier', user_name=user_name)
+    if user_role in ['customer', 'courier']:
+        return render_template(
+        'dashboard.html',
+        user_type=user_role.capitalize(),
+        user_name=user_name,
+        user_email=user_email, user_nickname=user_nickname, user_phone=user_phone,
+        profile_pic=profile_pic
+    )
     else:
         return redirect(url_for('main.login'))
     
@@ -171,14 +184,32 @@ def delete_user(email):
     customer = Customer.query.filter_by(email=email).first()
     courier = Courier.query.filter_by(email=email).first()
     
-    if customer:
-        db.session.delete(customer)
+    user = customer or courier
+
+    if user:
+        # Construct full path
+        if user.profile_pic:
+            relative_path = user.profile_pic
+            full_path = os.path.join(
+                os.path.dirname(os.path.abspath(__file__)),
+                'static',
+                relative_path.replace('uploads/', 'uploads/')
+            )
+
+            print(f"Attempting to delete profile image at: {full_path}")
+
+            if os.path.exists(full_path):
+                try:
+                    os.remove(full_path)
+                    print(f"Deleted: {full_path}")
+                except Exception as e:
+                    print(f"Error deleting file: {e}")
+            else:
+                print(f"File not found: {full_path}")
+
+        db.session.delete(user)
         db.session.commit()
-        return f"Customer with email {email} deleted."
-    
-    if courier:
-        db.session.delete(courier)
-        db.session.commit()
-        return f"Courier with email {email} deleted."
+        user_type = "Customer" if customer else "Courier"
+        return f"{user_type} with email {email} deleted."
     
     return f"No user with email {email} found."

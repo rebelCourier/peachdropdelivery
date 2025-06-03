@@ -96,7 +96,7 @@
       </li>
     </ul>
   </nav> -->
-  {% if user_type == 'Customer' %}
+  {% if user_role == 'customer' %}
     <nav>
         <img class="title-logo" src="{{ url_for('static', filename='baseassets/peachtitlelogo.svg') }}" alt="title logo"
             onclick="location.href='/'">
@@ -114,7 +114,7 @@
             </li>
         </ul>
     </nav>
-    {% elif user_type == 'Courier' %}
+    {% elif user_role == 'courier' %}
     <nav>
         <img class="title-logo" src="{{ url_for('static', filename='baseassets/peachtitlelogo.svg') }}" alt="title logo"
             onclick="location.href='/'">

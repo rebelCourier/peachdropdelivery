@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, session
 import os
 from flask_sqlalchemy import SQLAlchemy
 
@@ -16,5 +16,12 @@ def create_app():
     from app.routes import main, user
     app.register_blueprint(main)
     app.register_blueprint(user)
+    
+    @app.context_processor
+    def inject_user():
+        return {
+            'user_role': session.get('user_role'),
+            'user_name': session.get('user_name')
+        }
     
     return app

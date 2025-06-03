@@ -3,11 +3,25 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css' rel='stylesheet' />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/dashboardstyle.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/reset.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='baseassets/peachlogo.svg') }}">
+    <style>
+        #profile {
+            background-image: url("{{ url_for('static', filename='baseassets/skylineatl.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            width: 100%;
+            height: 90vh;
+        }
+    </style>
     <title>{{ user_type }} Dashboard</title>
 </head>
 
 <body>
-    {% if user_type == 'Customer' %}
+    {% if user_role == 'customer' %}
     <nav>
         <img class="title-logo" src="{{ url_for('static', filename='baseassets/peachtitlelogo.svg') }}" alt="title logo"
             onclick="location.href='/'">
@@ -25,7 +39,7 @@
             </li>
         </ul>
     </nav>
-    {% elif user_type == 'Courier' %}
+    {% elif user_role == 'courier' %}
     <nav>
         <img class="title-logo" src="{{ url_for('static', filename='baseassets/peachtitlelogo.svg') }}" alt="title logo"
             onclick="location.href='/'">
@@ -42,30 +56,48 @@
             </li>
         </ul>
     </nav>
-    {% else %}
-    <nav>
-        <img class="title-logo" src="{{ url_for('static', filename='baseassets/peachtitlelogo.svg') }}" alt="title logo"
-            onclick="location.href='/'">
-        <ul class="nav-links">
-            <li class="option"><a href="{{ url_for('main.about') }}">About</a></li>
-            <li class="option"><a href="{{ url_for('main.order') }}">Order</a></li>
-            <li class="option"><a href="{{ url_for('main.couriers') }}">Couriers</a></li>
-            <li class="option"><a href="{{ url_for('main.map') }}">Map</a></li>
-            <li class="option dropdown">
-                <a href="#">Account</a>
-                <div class="dropdown-menu">
-                    <button onclick="location.href='/register-courier'">Register As Courier</button>
-                    <button onclick="location.href='/register-customer'">Register As Customer</button>
-                    <button onclick="location.href='/login'">Sign In</button>
-                </div>
-            </li>
-        </ul>
-    </nav>
     {% endif %}
 
     <main>
-        <h1>Welcome, {{ user_name }}!</h1>
-        <p>You are logged in as a <strong>{{ user_type }}</strong>.</p>
+        {% if user_role == 'courier' %}
+        <section class="dashboard">
+
+            <div id="profile">
+
+                <div class="welcome">
+                    <h1>Welcome, {{ user_name }}!</h1>
+                    <p>You are logged in as a <strong>{{ user_type }}</strong>.</p>
+                </div>
+
+                <div class="profile_info">
+                    <div class="details">
+                        <p>{{ user_email }}</p>
+                        <p>{{ user_name }} ({{ user_nickname }})</p>
+                        <p>{{ user_phone }}</p>
+                    </div>
+                    <img src="{{ url_for('static', filename=profile_pic) }}" alt="Profile Picture">
+                </div>
+
+            </div>
+
+            <div id="map"
+                style="width: 95%; height: 600px; border-radius: 100px; border: 5px solid var(--osage-orange);">
+            </div>
+
+
+        </section>
+
+        {% elif user_role == 'customer' %}
+        <section class="dashboard">
+
+            <div id="profile">
+                <h1>Welcome, {{ user_name }}!</h1>
+                <p>You are logged in as a <strong>{{ user_type }}</strong>.</p>
+            </div>
+
+        </section>
+
+        {% endif %}
 
         <footer>
             <img class="footer-logo" src="{{ url_for('static', filename='baseassets/peachtitlelogo.svg') }}"
@@ -76,6 +108,29 @@
             </p>
         </footer>
     </main>
+    <!-- Mapbox JS -->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js'></script>
+
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoicmViZWwtZGV2ZWxvcGVyIiwiYSI6ImNtYmZyMzFsdTJhdmEya3Bvc2k3bnR4a28ifQ.UchyLg2YOcbdhp6hxfsLdQ';  // Replace with your token
+        const map = new mapboxgl.Map({
+            container: 'map', // Make sure this matches your div ID
+            style: 'mapbox://styles/mapbox/streets-v12',
+            center: [-84.3880, 33.7490], // Default center (Atlanta)
+            zoom: 12
+        });
+
+        // Sample courier marker (replace this with real data later)
+        const courier = new mapboxgl.Marker({ color: 'blue' })
+            .setLngLat([-84.3880, 33.7490])
+            .addTo(map);
+
+        // Sample customer marker (replace with real location)
+        const customer = new mapboxgl.Marker({ color: 'green' })
+            .setLngLat([-84.3950, 33.7520])
+            .addTo(map);
+    </script>
+
 </body>
 
 </html>
