@@ -1,7 +1,7 @@
 from flask import Flask
 from flasgger import Swagger
 from app.modules.main.route import main_bp
-from app.db.db import db
+from app.db.database import db
 
 
 def initialize_route(app: Flask):

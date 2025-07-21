@@ -23,6 +23,10 @@ nav {
   z-index: 1000;
 }
 
+.hamburger {
+  display: none;
+}
+
 .title-logo {
   padding-left: 20px;
   color: var(--spanish-orange);
@@ -72,87 +76,207 @@ nav {
   display: flex;
 }
 
-.dashboard {
+.courier-dash {
   display: grid;
   grid-template-areas:
     "profile    profile     profile"
     "dash       map         map"
-    "customers  customers   customers";
+    "history    history     history";
   grid-template-rows: repeat(3, 1fr);
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  margin-top: 80px;
+  margin-top: 72px;
   margin-bottom: 30px;
   z-index: 1;
   gap: 20px;
 }
 
+.dashboard {
+  display: grid;
+  grid-template-areas:
+    "profile    profile     profile"
+    "dash       map         map"
+    "history    history     history";
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin-bottom: 70px;
+  z-index: 1;
+  gap: 20px;
+}
+
 #profile {
-    grid-area: profile;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+  grid-area: profile;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .welcome {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    font-family: 'Inter';
-    font-size: 30px;
-    font-weight: bold;
-    letter-spacing: 3px;
-    color: var(--osage-orange);
-    margin-left: 50px;
-    background-color: rgba(0, 0, 0, .5);
-    padding: 10px 40px;
-    border-radius: 100px;
-    border-right: 5px solid var(--osage-orange);
-    border-left: 5px solid var(--osage-orange);
-
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-family: "Inter";
+  font-size: 25px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  color: var(--osage-orange);
+  margin-left: 50px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px 40px;
+  border-radius: 100px;
+  border-right: 5px solid var(--osage-orange);
+  border-left: 5px solid var(--osage-orange);
 }
 
 .profile_info {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    margin-right: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-right: 50px;
 }
 
 .profile_info .details {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    align-items: end;
-    font-family: 'Inter';
-    font-size: larger;
-    font-weight: bold;
-    letter-spacing: 2px;
-    color: var(--osage-orange);
-    background-color: rgba(0, 0, 0, .5);
-    padding: 10px 40px;
-    border-radius: 100px;
-    border-right: 5px solid var(--osage-orange);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: end;
+  font-family: "Inter";
+  font-size: larger;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: var(--osage-orange);
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px 40px;
+  border-radius: 100px;
+  border-right: 5px solid var(--osage-orange);
 }
 
 .profile_info img {
-    display: flex;
-    flex-direction: column;
-    width: 200px;
+  display: flex;
+  flex-direction: column;
+  width: 150px;
 }
 
-img {
-    border-radius: 100px;
-    border: 5px solid var(--osage-orange);
+.pfp {
+  border-radius: 100px;
+  border: 5px solid var(--osage-orange);
+}
+
+#dash {
+  grid-area: dash;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px 20px;
+}
+
+#active-delivery,
+#completed-deliveries {
+  padding: 20px;
+  margin: 10px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #fdfdfd;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.no-delivery-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px dashed #ccc;
+  text-align: center;
+  color: #555;
+}
+
+.active-order-box {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.active-order-box h2 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.no-order-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  padding: 50px 0px;
+}
+
+.order-detail {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.order-detail label {
+  font-weight: 600;
+  color: #444;
+}
+
+.order-detail span {
+  color: #222;
 }
 
 #map {
-    grid-area: map;
+  grid-area: map;
+}
+
+.history-container {
+  grid-area: history;
+  padding: 0px 2rem;
+}
+
+#completed-history {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: fit-content;
+  border: 5px solid var(--osage-orange);
+  border-radius: 50px;
+  padding: 25px 25px;
+}
+
+.delivery-history {
+  padding: 1rem;
+  background: #f9f9f9;
+  border-top: 2px solid #ccc;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.delivery-history ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.delivery-history li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #ddd;
 }
 
 footer {
@@ -173,4 +297,158 @@ footer {
 .footer-logo {
   padding-left: 25px;
   height: 70px;
+}
+
+@media screen and (max-width: 768px) {
+
+  .title-logo {
+    padding-left: 20px;
+    color: var(--spanish-orange);
+  }
+
+  .hamburger {
+    display: block;
+    font-size: xx-large;
+    padding-right: 15px;
+    color: var(--dark-green);
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    right: 0;
+    width: fit-content;
+    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "Inter";
+    background-color: var(--osage-orange);
+    padding-left: 15px;
+    padding-bottom: 5px;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .option {
+    padding-right: 20px;
+    color: var(--dark-green);
+  }
+
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    gap: 10px;
+    background-color: var(--osage-orange);
+    border: 2px solid var(--dark-green);
+    border-radius: 8px;
+    padding: 10px;
+    z-index: 1001;
+    font-family: "Inter";
+    font-weight: 600;
+    font-size: large;
+    align-items: center;
+  }
+
+  .dropdown-menu button {
+    width: max-content;
+    color: var(--dark-green);
+    padding: 10px;
+  }
+
+  .dropdown:hover .dropdown-menu {
+    display: flex;
+  }
+
+  .dashboard {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    min-width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+    margin-top: 70px;
+    z-index: 1;
+  }
+
+  #profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0px;
+    padding: 0px;
+  }
+
+  .welcome {
+    width: 100%;
+    font-size: small;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    padding: 5px 20px;
+  }
+
+  .profile_info {
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 20px;
+    margin: 0px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .profile_info .details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: x-small;
+    border-radius: 100px;
+    margin: 0px;
+    padding: 10px 15px;
+    border-right: 5px solid var(--osage-orange);
+    border-left: 5px solid var(--osage-orange);
+  }
+
+  footer {
+    display: flex;
+    flex-direction: row;
+    background-color: black;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 90px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    border-top: 5px solid var(--spanish-orange);
+  }
+
+  .footer-logo {
+    padding-left: 0px;
+    padding-right: 10px;
+    height: 50px;
+  }
+
+  .summary {
+    font-size: xx-small;
+    color: var(--osage-orange);
+    text-wrap: block;
+    padding-right: 10px;
+  }
 }

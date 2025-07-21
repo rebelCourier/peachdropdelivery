@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css' rel='stylesheet' />
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/dashboardstyle.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/reset.css') }}">
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='baseassets/peachlogo.svg') }}">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/dashboardstyle.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/reset.css') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='baseassets/peachlogo.svg') }}" />
     <style>
         #profile {
             background-image: url("{{ url_for('static', filename='baseassets/skylineatl.jpg') }}");
@@ -24,16 +24,21 @@
     {% if user_role == 'customer' %}
     <nav>
         <img class="title-logo" src="{{ url_for('static', filename='baseassets/peachtitlelogo.svg') }}" alt="title logo"
-            onclick="location.href='/'">
-        <ul class="nav-links">
+            onclick="location.href='/'" />
+        <button class="hamburger" onclick="toggleMenu()">☰</button>
+        <ul class="nav-links" id="nav-links">
             <li class="option"><a href="{{ url_for('main.about') }}">About</a></li>
             <li class="option"><a href="{{ url_for('main.order') }}">Order</a></li>
-            <li class="option"><a href="{{ url_for('main.couriers') }}">Couriers</a></li>
+            <li class="option">
+                <a href="{{ url_for('main.couriers') }}">Couriers</a>
+            </li>
             <li class="option"><a href="{{ url_for('main.map') }}">Map</a></li>
             <li class="option dropdown">
                 <a href="#">Account</a>
                 <div class="dropdown-menu">
-                    <button onclick="location.href='/dashboard'">Customer Dashboard</button>
+                    <button onclick="location.href='/dashboard'">
+                        Customer Dashboard
+                    </button>
                     <button onclick="location.href='/logout'">Log Out</button>
                 </div>
             </li>
@@ -42,15 +47,20 @@
     {% elif user_role == 'courier' %}
     <nav>
         <img class="title-logo" src="{{ url_for('static', filename='baseassets/peachtitlelogo.svg') }}" alt="title logo"
-            onclick="location.href='/'">
-        <ul class="nav-links">
+            onclick="location.href='/'" />
+        <button class="hamburger" onclick="toggleMenu()">☰</button>
+        <ul class="nav-links" id="nav-links">
             <li class="option"><a href="{{ url_for('main.about') }}">About</a></li>
-            <li class="option"><a href="{{ url_for('main.couriers') }}">Couriers</a></li>
+            <li class="option">
+                <a href="{{ url_for('main.couriers') }}">Couriers</a>
+            </li>
             <li class="option"><a href="{{ url_for('main.map') }}">Map</a></li>
             <li class="option dropdown">
                 <a href="#">Account</a>
                 <div class="dropdown-menu">
-                    <button onclick="location.href='/dashboard'">Courier Dashboard</button>
+                    <button onclick="location.href='/dashboard'">
+                        Courier Dashboard
+                    </button>
                     <button onclick="location.href='/logout'">Log Out</button>
                 </div>
             </li>
@@ -60,10 +70,8 @@
 
     <main>
         {% if user_role == 'courier' %}
-        <section class="dashboard">
-
+        <section class="dashboard courier-dash">
             <div id="profile">
-
                 <div class="welcome">
                     <h1>Welcome, {{ user_name }}!</h1>
                     <p>You are logged in as a <strong>{{ user_type }}</strong>.</p>
@@ -75,61 +83,356 @@
                         <p>{{ user_name }} ({{ user_nickname }})</p>
                         <p>{{ user_phone }}</p>
                     </div>
-                    <img src="{{ url_for('static', filename=profile_pic) }}" alt="Profile Picture">
+                    <img class="pfp" src="{{ url_for('static', filename=profile_pic) }}" alt="Profile Picture" center
+                        center />
                 </div>
-
             </div>
 
-            <div id="map"
-                style="width: 95%; height: 600px; border-radius: 100px; border: 5px solid var(--osage-orange);">
+            <section id="dash">
+                <div id="active-delivery" class="active-delivery-box">
+                    <h2>Active Delivery</h2>
+                    <p>
+                        <strong>Customer:</strong> <span id="cust-name">Loading...</span>
+                    </p>
+                    <p>
+                        <strong>Phone:</strong> <span id="cust-phone">Loading...</span>
+                    </p>
+                    <p>
+                        <strong>Address:</strong>
+                        <span id="cust-address">Loading...</span>
+                    </p>
+                    <p>
+                        <strong>From:</strong>
+                        <span id="restaurant-name">Loading...</span>
+                    </p>
+                    <p>
+                        <strong>Items:</strong> <span id="order-items">Loading...</span>
+                    </p>
+                    <p>
+                        <strong>Note:</strong> <span id="order-note">Loading...</span>
+                    </p>
+                    <div id="delivery-action">
+                        <!-- Delivery info populated by JS -->
+                        <button id="mark-delivered-btn">Mark as Delivered</button>
+                    </div>
+
+                </div>
+            </section>
+
+
+            <div id="map" style="
+            width: 95%;
+            height: 600px;
+            border-radius: 100px;
+            border: 5px solid var(--osage-orange);
+          "></div>
+
+            <div class="history-container">
+                <section id="completed-history" class="delivery-history">
+                    <h3>Completed Deliveries</h3>
+                    <ul id="delivery-list"></ul>
+                </section>
             </div>
 
 
         </section>
 
-        {% elif user_role == 'customer' %}
-        <section class="dashboard">
 
+
+        {% elif user_role == 'customer' %}
+        <section class="dashboard customer-dash">
             <div id="profile">
-                <h1>Welcome, {{ user_name }}!</h1>
-                <p>You are logged in as a <strong>{{ user_type }}</strong>.</p>
+                <div class="welcome">
+                    <h1>Welcome, {{ user_name }}!</h1>
+                    <p>You are logged in as a <strong>{{ user_type }}</strong>.</p>
+                </div>
+
+                <div class="profile_info">
+                    <div class="details">
+                        <p>{{ user_email }}</p>
+                        <p>{{ user_name }} ({{ user_address }})</p>
+                        <p>{{ user_phone | phone }}</p>
+                    </div>
+                    <img class="pfp" src="{{ url_for('static', filename=profile_pic) }}" alt="Profile Picture" />
+                </div>
             </div>
 
+            <section id="dash" class="dashboard">
+                <div id="active-order-box">
+                    <h2>📦 Active Delivery</h2>
+
+                    <div class="order-detail">
+                        <label>Courier:</label>
+                        <span id="cour-name">Loading...</span>
+                    </div>
+
+                    <div class="order-detail">
+                        <label>Phone:</label>
+                        <span id="cour-phone">Loading...</span>
+                    </div>
+
+                    <div class="order-detail">
+                        <label>From:</label>
+                        <span id="restaurant-name">Loading...</span>
+                    </div>
+
+                    <div class="order-detail">
+                        <label>Items:</label>
+                        <span id="order-items">Loading...</span>
+                    </div>
+
+                    <div class="order-detail">
+                        <label>Note:</label>
+                        <span id="order-note">Loading...</span>
+                    </div>
+                </div>
+
+                <div id="no-active-order" class="no-order-box"
+                    style="display: none; padding: 0px 30px; text-align: center;">
+                    <h2>🛑 No Active Deliveries</h2>
+                    <p>You haven't placed any orders yet, or your order hasn't been accepted.</p>
+                </div>
+            </section>
+
+            <div id="map" style="
+            width: 95%;
+            height: 600px;
+            border-radius: 100px;
+            border: 5px solid var(--osage-orange);
+          "></div>
+
+            <div class="history-container">
+                <section id="completed-history" class="order-history">
+                    <h3>Order History</h3>
+                    <ul id="order-list"></ul>
+                </section>
+            </div>
         </section>
 
         {% endif %}
 
         <footer>
             <img class="footer-logo" src="{{ url_for('static', filename='baseassets/peachtitlelogo.svg') }}"
-                alt="small logo">
-            <p class="summary"> Peach Drop Delivery connects customers with local stores and independent cyclists for
-                fast, eco-friendly deliveries across Atlanta. Order food or essentials and have them delivered by bike,
-                right from your neighborhood.
+                alt="small logo" />
+            <p class="summary">
+                Peach Drop Delivery connects customers with local stores and
+                independent cyclists for fast, eco-friendly deliveries across Atlanta.
+                Order food or essentials and have them delivered by bike, right from
+                your neighborhood.
             </p>
         </footer>
     </main>
     <!-- Mapbox JS -->
-    <script src='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js'></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
 
     <script>
-        mapboxgl.accessToken = 'pk.eyJ1IjoicmViZWwtZGV2ZWxvcGVyIiwiYSI6ImNtYmZyMzFsdTJhdmEya3Bvc2k3bnR4a28ifQ.UchyLg2YOcbdhp6hxfsLdQ';  // Replace with your token
-        const map = new mapboxgl.Map({
-            container: 'map', // Make sure this matches your div ID
-            style: 'mapbox://styles/mapbox/streets-v12',
-            center: [-84.3880, 33.7490], // Default center (Atlanta)
-            zoom: 12
+        const userRole = "{{ user_role }}";
+        let courierMarker = null;
+        let map;
+
+        function initMap() {
+            mapboxgl.accessToken = "pk.eyJ1IjoicmViZWwtZGV2ZWxvcGVyIiwiYSI6ImNtYmZyMzFsdTJhdmEya3Bvc2k3bnR4a28ifQ.UchyLg2YOcbdhp6hxfsLdQ";
+            map = new mapboxgl.Map({
+                container: "map",
+                style: "mapbox://styles/mapbox/streets-v11",
+                center: [-84.39, 33.75],
+                zoom: 13
+            });
+
+            if (userRole === "courier") {
+                if (navigator.geolocation) {
+                    navigator.geolocation.watchPosition(
+                        pos => {
+                            const { latitude, longitude } = pos.coords;
+
+                            if (!courierMarker) {
+                                courierMarker = new mapboxgl.Marker({ color: "blue" })
+                                    .setLngLat([longitude, latitude])
+                                    .addTo(map);
+                                map.setCenter([longitude, latitude]);
+                            } else {
+                                courierMarker.setLngLat([longitude, latitude]);
+                            }
+
+                            fetch("/update-location", {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify({ lat: latitude, lng: longitude })
+                            });
+                        },
+                        err => console.error("Geolocation error:", err),
+                        { enableHighAccuracy: true }
+                    );
+                } else {
+                    alert("Geolocation not supported.");
+                }
+
+                // Optionally show customer delivery location if known
+                fetch("/courier/active-delivery-location")
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.status === "success") {
+                            new mapboxgl.Marker({ color: "green" })
+                                .setLngLat([data.lng, data.lat])
+                                .addTo(map);
+                        }
+                    });
+            }
+
+            if (userRole === "customer") {
+                pollCourierLocation();
+            }
+        }
+
+        let courierMarkers = {};  // Keyed by courier ID
+
+        function pollCourierLocation() {
+            setInterval(async () => {
+                const orderStatusRes = await fetch("/customer/active-order");
+                const orderStatusData = await orderStatusRes.json();
+
+                if (orderStatusData.status === "success") {
+                    // Show only assigned courier
+                    const courierRes = await fetch("/customer/courier-location");
+                    const data = await courierRes.json();
+
+                    if (data.status === "success") {
+                        const { lat, lng } = data;
+
+                        if (!courierMarker) {
+                            courierMarker = new mapboxgl.Marker({ color: "blue" })
+                                .setLngLat([lng, lat])
+                                .addTo(map);
+                            map.setCenter([lng, lat]);
+                        } else {
+                            courierMarker.setLngLat([lng, lat]);
+                        }
+
+                        // Remove other markers if any
+                        Object.values(courierMarkers).forEach(m => m.remove());
+                        courierMarkers = {};
+                    }
+                } else {
+                    // Show all active couriers
+                    const courierListRes = await fetch("/customer/active-couriers");
+                    const listData = await courierListRes.json();
+
+                    if (listData.status === "success") {
+                        // Remove old markers
+                        Object.values(courierMarkers).forEach(marker => marker.remove());
+                        courierMarkers = {};
+
+                        listData.couriers.forEach(courier => {
+                            const { id, lat, lng } = courier;
+                            const marker = new mapboxgl.Marker({ color: "orange" })
+                                .setLngLat([lng, lat])
+                                .addTo(map);
+                            courierMarkers[id] = marker;
+                        });
+                    }
+                }
+            }, 5000);
+        }
+
+
+        async function loadActiveDelivery() {
+            const res = await fetch("/courier/active-delivery");
+            const data = await res.json();
+            const deliveryBox = document.getElementById("active-delivery");
+
+            if (data.status === "success") {
+                deliveryBox.innerHTML = `
+                <h3>Current Delivery</h3>
+                <p><strong>Customer:</strong> ${data.customer_name}</p>
+                <p><strong>Phone:</strong> ${data.customer_phone}</p>
+                <p><strong>Address:</strong> ${data.delivery_address}</p>
+                <p><strong>Restaurant:</strong> ${data.restaurant_name}</p>
+                <p><strong>Items:</strong> ${Array.isArray(data.items) ? data.items.join(", ") : data.items}</p>
+                <p><strong>Note:</strong> ${data.note || "None"}</p>
+                <button id="mark-delivered-btn">Mark as Delivered</button>
+            `;
+
+                document.getElementById("mark-delivered-btn").addEventListener("click", async () => {
+                    const response = await fetch("/courier/mark-delivered", { method: "POST" });
+                    const result = await response.json();
+                    if (result.status === "success") {
+                        alert("Marked as delivered.");
+                        loadActiveDelivery();
+                        loadCompletedDeliveries();
+                    } else {
+                        alert(result.message);
+                    }
+                });
+            } else {
+                deliveryBox.innerHTML = "<p>No active deliveries.</p>";
+            }
+        }
+
+        async function loadCompletedDeliveries() {
+            const res = await fetch("/courier/completed-deliveries");
+            const data = await res.json();
+            const completedBox = document.getElementById("completed-deliveries");
+
+            if (data.status === "success" && data.deliveries.length > 0) {
+                completedBox.innerHTML = "<h3>Completed Deliveries</h3>" + data.deliveries.map(order => `
+                <div class="delivery-card">
+                    <p><strong>Restaurant:</strong> ${order.restaurant_name}</p>
+                    <p><strong>Address:</strong> ${order.delivery_address}</p>
+                    <p><strong>Items:</strong> ${order.items}</p>
+                    <p><strong>Note:</strong> ${order.note || "None"}</p>
+                    <p><strong>Completed:</strong> ${new Date(order.completed_at).toLocaleString()}</p>
+                </div>
+            `).join("");
+            } else {
+                completedBox.innerHTML = "<p>No completed deliveries yet.</p>";
+            }
+        }
+
+        async function loadCustomerOrder() {
+            const res = await fetch("/customer/active-order");
+            const data = await res.json();
+            const orderBox = document.getElementById("active-order-box");
+            const noOrderBox = document.getElementById("no-active-order");
+
+            if (data.status === "success") {
+                orderBox.style.display = "block";
+                noOrderBox.style.display = "none";
+
+                document.getElementById("cour-name").textContent = data.courier_name || "Unavailable";
+                document.getElementById("cour-phone").textContent = data.courier_phone || "N/A";
+                document.getElementById("restaurant-name").textContent = data.restaurant_name || "N/A";
+                document.getElementById("order-items").textContent = Array.isArray(data.items) ? data.items.join(", ") : data.items;
+                document.getElementById("order-note").textContent = data.note || "None";
+            } else {
+                orderBox.style.display = "none";
+                noOrderBox.style.display = "block";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            initMap();
+
+            if (userRole === "courier") {
+                loadActiveDelivery();
+                loadCompletedDeliveries();
+            }
+
+            if (userRole === "customer") {
+                loadCustomerOrder();
+            }
         });
 
-        // Sample courier marker (replace this with real data later)
-        const courier = new mapboxgl.Marker({ color: 'blue' })
-            .setLngLat([-84.3880, 33.7490])
-            .addTo(map);
 
-        // Sample customer marker (replace with real location)
-        const customer = new mapboxgl.Marker({ color: 'green' })
-            .setLngLat([-84.3950, 33.7520])
-            .addTo(map);
     </script>
+
+    <script>
+        function toggleMenu() {
+            const nav = document.getElementById("nav-links");
+            nav.classList.toggle("active");
+        }
+    </script>
+
+
 
 </body>
 

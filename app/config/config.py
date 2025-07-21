@@ -3,7 +3,7 @@ class BaseConfig:
     DEBUG = False
     TESTING = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SECRET_KEY = 'your-secret-key'
+    SECRET_KEY = 'S3c@!qL#2vZ8pT0$Km7^uMdxBn!eFr91'
 
 class DevelopmentConfig(BaseConfig):
     """Development configuration."""
